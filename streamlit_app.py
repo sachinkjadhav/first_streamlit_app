@@ -35,6 +35,14 @@ my_cnxinsert = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 streamlit.write('The user entered ', add_my_fruit)
 my_curinsert = my_cnxinsert.cursor()
 my_curinsert.execute("insert into fruit_load_list values ($s)",add_my_fruit)
-my_cur = my_cnx.cursor()
-my_cur.execute("select * from fruit_load_list")
-my_data_row = my_cur.fetchall()
+con.cursor().execute(
+    "insert into fruit_load_list (FRUIT_NAME) "
+    "VALUES(%s)", (
+    add_my_fruit    
+    ))
+my_cnx2 = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+my_cur2 = my_cnx2.cursor()
+my_cur2.execute("select * from fruit_load_list")
+my_data_row2 = my_cur2.fetchall()
+streamlit.header("The fruit load list contains after insert:")
+streamlit.text(my_data_row2)

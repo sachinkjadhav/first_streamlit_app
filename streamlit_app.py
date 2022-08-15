@@ -22,6 +22,8 @@ def get_fruitvice_data(this_fruit_choice):
     fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice )
     fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
     return fruityvice_normalized
+
+   
     
 streamlit.header("Fruityvice Fruit Advice!")
 try:
@@ -41,15 +43,23 @@ my_cur.execute("select * from fruit_load_list")
 my_data_row = my_cur.fetchall()
 streamlit.header("The fruit load list contains:")
 streamlit.text(my_data_row)
+def insert_row_snowflake(new_fruit):
+    with my_cnx.cursor() as my_cur:
+        my_curinsert.execute(
+        "insert into fruit_load_list (FRUIT_NAME) "
+        "VALUES(%s)", (
+        new_fruit    
+        ))
+
 add_my_fruit = streamlit.text_input('What fruit would you like to add?')
-my_cnxinsert = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-streamlit.write('The user entered ', add_my_fruit)
-my_curinsert = my_cnxinsert.cursor()
-my_curinsert.execute(
-    "insert into fruit_load_list (FRUIT_NAME) "
-    "VALUES(%s)", (
-    add_my_fruit    
-    ))
+if streamlit.button('Add a fruit to list') 
+    my_cnxinsert = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    streamlit.write('The user entered ', add_my_fruit)
+    back_from_function = insert_row_snowflake(add_my_fruit)
+    streamlit.text(back_from_function)
+    #my_curinsert = my_cnxinsert.cursor()
+
+
 my_cnx2 = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur2 = my_cnx2.cursor()
 my_cur2.execute("select * from fruit_load_list")

@@ -58,7 +58,7 @@ if streamlit.button('Add a fruit to list'):
     streamlit.text(back_from_function)
     #my_curinsert = my_cnxinsert.cursor()
 
-if streamlit.button('Get Fruit List')
+if streamlit.button('Get Fruit List'):
     my_cnx2 = snowflake.connector.connect(**streamlit.secrets["snowflake"])
     my_cur2 = my_cnx2.cursor()
     my_cur2.execute("select * from fruit_load_list")

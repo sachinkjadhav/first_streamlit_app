@@ -45,8 +45,8 @@ streamlit.header("The fruit load list contains:")
 streamlit.text(my_data_row)
 def insert_row_snowflake(new_fruit):
     with my_cnx.cursor() as my_cur:
-        my_cnxinsert = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-        my_curinsert.execute("insert into fruit_load_list (FRUIT_NAME) "
+        my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+        my_cnx.execute("insert into fruit_load_list (FRUIT_NAME) "
         "VALUES(%s)", (
         new_fruit    
         ))

@@ -41,7 +41,7 @@ my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("select * from fruit_load_list")
 my_data_row = my_cur.fetchall()
-streamlit.header("The fruit load list contains:")
+streamlit.header("View our fruit list - Add Your Favorites!")
 streamlit.text(my_data_row)
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 def insert_row_snowflake(new_fruit):
@@ -58,10 +58,11 @@ if streamlit.button('Add a fruit to list'):
     streamlit.text(back_from_function)
     #my_curinsert = my_cnxinsert.cursor()
 
-
-my_cnx2 = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur2 = my_cnx2.cursor()
-my_cur2.execute("select * from fruit_load_list")
-my_data_row2 = my_cur2.fetchall()
+if streamlit.button('Get Fruit List')
+    my_cnx2 = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    my_cur2 = my_cnx2.cursor()
+    my_cur2.execute("select * from fruit_load_list")
+    my_data_row2 = my_cur2.fetchall()
+    
 streamlit.header("The fruit load list contains after insert:")
 streamlit.text(my_data_row2)

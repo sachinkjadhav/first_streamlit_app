@@ -34,8 +34,7 @@ add_my_fruit = streamlit.text_input('What fruit would you like to add?')
 my_cnxinsert = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 streamlit.write('The user entered ', add_my_fruit)
 my_curinsert = my_cnxinsert.cursor()
-my_curinsert.execute("insert into fruit_load_list values ($s)",add_my_fruit)
-con.cursor().execute(
+my_curinsert.execute(
     "insert into fruit_load_list (FRUIT_NAME) "
     "VALUES(%s)", (
     add_my_fruit    
